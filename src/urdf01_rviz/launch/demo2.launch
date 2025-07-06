@@ -1,0 +1,10 @@
+<launch>
+
+    <!-- 设置参数 -->
+    <param name="robot_description" textfile="$(find urdf01_rviz)/urdf/urdf/mybot1.urdf" />
+
+    <!-- 启动 rviz -->
+    <!--args="-d $(find urdf01_rviz)/config/rviz/show_mycar.rviz"-->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find urdf01_rviz)/config/rviz/show2.rviz"/>
+
+</launch>

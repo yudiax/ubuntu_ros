@@ -1,0 +1,2 @@
+urdf01_rviz:urdf02_gazebo
+-DCATKIN_DEVEL_PREFIX=/home/user/my_workspace/devel -DCMAKE_INSTALL_PREFIX=/home/user/my_workspace/install -G Unix Makefiles
