@@ -31,8 +31,13 @@ sudo apt-get 安装 ros-noetic-arbotix
 
 我在gezebo上导入，发先不显示，重新添加了质量就显示
 
-roslaunch urdf02_gazebo demo03_env.launch gezol roslaunch urdf02_gazebo demo04_sensor.launch rviz
+roslaunch urdf02_gazebo demo03_env.launch gezol
+roslaunch urdf02_gazebo demo04_sensor.launch rviz
 
 sudo apt-get 安装 ros-noetic-rviz
 
 sudo apt-get 删除 ros-neotic-* sudo apt-get 删除 python-rosdep python-rosinstall python-rosinstall-plugins ros-noetic-ros* sudo apt-get autoremove
+
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist "linear:,
+angle  z改0.5
+
