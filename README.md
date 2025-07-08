@@ -31,13 +31,41 @@ sudo apt-get 安装 ros-noetic-arbotix
 
 我在gezebo上导入，发先不显示，重新添加了质量就显示
 
-roslaunch urdf02_gazebo demo03_env.launch gezol
-roslaunch urdf02_gazebo demo04_sensor.launch rviz
+分割线————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+大概说一下怎么使用这些代码吧，
+1.先安装虚拟机ubuntu系统20.04，并配置ros-noetic-full-desk，和vscode
+2.下载完代码后，先终端运行   roscore
+3.进入工作空间vscode终端运行source ./devel/setup.bash
+4.然后运行launch文件就行，所有代码都可以运行
 
-sudo apt-get 安装 ros-noetic-rviz
+5.分为 urdf01_rviz 和 urdf02_gazebo 两个功能包,
 
-sudo apt-get 删除 ros-neotic-* sudo apt-get 删除 python-rosdep python-rosinstall python-rosinstall-plugins ros-noetic-ros* sudo apt-get autoremove
+urdf01_rviz
+是6.3.4 urdf练习的四轮小车，运行指令roslaunch urdf01_rviz demo05_test.launch用urdf写的小车
 
-rostopic pub -r 10 /cmd_vel geometry_msgs/Twist "linear:,
-angle  z改0.5
+6.4.4 用xacro写的四轮带摄像头和传感器的小车，car.launch，运行roslaunch urdf01_rviz car.launch
+
+6.5.1让小车动起来并显示运动轨迹，
+先运行control.launch，再在rviz显示odometry，topic改为odom，改fixed frame从base_footprint为odom，再开一个终端rostopic list,检查有没有cmd_vel
+在终端发布消息rostopic pub -r 10 /cmd_vel geometry_msgs/Twist '{linear: {x: 0.2, y: 0, z: 0}, angular: {x: 0, y: 0, z: 0.5}}'
+就可以动起来了并生成红色圈
+
+6.6.3 URDF集成Gazebo实操————将之前的机器人模型(xacro版)显示在 gazebo 中
+后面集成gezebo,launch urdf02_gazebo 功能包来运行就行
+运行roslaunch urdf02_gazebo demo02_car.launch显示模型
+
+6.6.4世界文件，后缀是world的那个
+
+6.7.1
+运行roslaunch urdf02_gazebo demo03_env.launch显示世界上的模型，再运行roslaunch urdf02_gazebo demo04_sensor.launch并显示运动轨迹
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist '{linear: {x: 0.2, y: 0, z: 0}, angular: {x: 0, y: 0, z: 0.5}}'
+
+6.7.2运行 demo04_sensor.launch
+
+6.7.3运行  demo03_env.launch
+然后终端运行rostopic pub -r 10 /cmd_vel geometry_msgs/Twist "linear:
+设置angular中的z为0.5后回车执行，发现小车实时转动的的视角图片展现了出来：
+
+6.7.4依旧运行  demo03_env.launch，按他说的配置，然后转动视角同上
+
 
